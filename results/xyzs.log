@@ -1,0 +1,716 @@
+2025/06/29 02:22:49 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 2139973992
+    GPU 0,1: NVIDIA GeForce RTX 4090
+    CUDA_HOME: /usr/local/cuda-11.8
+    NVCC: Cuda compilation tools, release 11.8, V11.8.89
+    GCC: gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    PyTorch: 1.13.1
+    PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2023.1-Product Build 20230303 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.6.0 (Git Hash 52b5f107dd9cf10910aaa19cb47f3abf9b349815)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.6
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.3.2  (built against CUDA 11.5)
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.6, CUDNN_VERSION=8.3.2, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.13.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+    TorchVision: 0.14.1
+    OpenCV: 4.11.0
+    MMEngine: 0.10.7
+
+Runtime environment:
+    cudnn_benchmark: False
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 2139973992
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2025/06/29 02:22:49 - mmengine - INFO - Config:
+blocks = 5
+class_names = [
+    'grain',
+    'leaf',
+    'steam',
+]
+class_names_scannet = (
+    'grain',
+    'leaf',
+    'steam',
+)
+custom_hooks = [
+    dict(after_iter=True, type='EmptyCacheHook'),
+]
+custom_imports = dict(imports=[
+    'oneformer3d',
+])
+data_prefix = dict(
+    pts='points',
+    pts_instance_mask='instance_mask',
+    pts_semantic_mask='semantic_mask')
+data_root_scannet = 'data/wheel_12/'
+dataset_type_scannet = 'WheelSegDataset'
+default_hooks = dict(
+    checkpoint=dict(
+        _scope_='mmdet3d', by_epoch=False, interval=500,
+        type='CheckpointHook'),
+    logger=dict(_scope_='mmdet3d', interval=50, type='LoggerHook'),
+    param_scheduler=dict(_scope_='mmdet3d', type='ParamSchedulerHook'),
+    sampler_seed=dict(_scope_='mmdet3d', type='DistSamplerSeedHook'),
+    timer=dict(_scope_='mmdet3d', type='IterTimerHook'),
+    visualization=dict(_scope_='mmdet3d', type='Det3DVisualizationHook'))
+default_scope = 'mmdet3d'
+env_cfg = dict(
+    cudnn_benchmark=False,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+label2cat = dict({0: 'grain', 1: 'leaf', 2: 'steam'})
+launcher = 'none'
+load_from = 'work_dirs/xyzs.pth'
+log_level = 'INFO'
+log_processor = dict(
+    _scope_='mmdet3d', by_epoch=False, type='LogProcessor', window_size=50)
+metainfo_scannet = dict(
+    classes=(
+        'grain',
+        'leaf',
+        'steam',
+    ), ignore_index=3)
+metric_meta = dict(
+    classes=[
+        'grain',
+        'leaf',
+        'steam',
+    ],
+    dataset_name='S3DIS',
+    ignore_index=[
+        3,
+    ],
+    label2cat=dict({
+        0: 'grain',
+        1: 'leaf',
+        2: 'steam'
+    }))
+model = dict(
+    backbone=dict(
+        num_planes=[
+            64,
+            128,
+            192,
+            256,
+            320,
+        ],
+        return_blocks=True,
+        type='SpConvUNet'),
+    criterion=dict(
+        inst_criterion=dict(
+            fix_dice_loss_weight=True,
+            iter_matcher=True,
+            loss_weight=[
+                0.5,
+                1.0,
+                1.0,
+                0.5,
+            ],
+            matcher=dict(
+                costs=[
+                    dict(type='QueryClassificationCost', weight=0.5),
+                    dict(type='MaskBCECost', weight=1.0),
+                    dict(type='MaskDiceCost', weight=1.0),
+                ],
+                type='HungarianMatcher'),
+            non_object_weight=0.05,
+            num_classes=3,
+            type='InstanceCriterion'),
+        num_semantic_classes=3,
+        sem_criterion=dict(
+            ignore_index=3, loss_weight=5.0, type='S3DISSemanticCriterion'),
+        type='S3DISUnifiedCriterion'),
+    data_preprocessor=dict(type='Det3DDataPreprocessor'),
+    decoder=dict(
+        activation_fn='gelu',
+        attn_mask=True,
+        d_model=256,
+        dropout=0.0,
+        fix_attention=True,
+        hidden_dim=1024,
+        in_channels=64,
+        iter_pred=True,
+        num_classes_1dataset=3,
+        num_heads=8,
+        num_layers=3,
+        num_queries_1dataset=400,
+        prefix_1dataset='scannet',
+        type='OneDataQueryDecoder'),
+    in_channels=7,
+    min_spatial_shape=128,
+    num_channels=64,
+    num_classes_1dataset=3,
+    prefix_1dataset='scannet',
+    test_cfg=dict(
+        inst_score_thr=0.0,
+        matrix_nms_kernel='linear',
+        nms=True,
+        npoint_thr=100,
+        num_sem_cls=3,
+        obj_normalization=True,
+        obj_normalization_thr=0.01,
+        sp_score_thr=0.15,
+        stuff_cls=[],
+        thing_cls=[
+            0,
+            1,
+            2,
+        ],
+        topk_insts=400),
+    train_cfg=dict(),
+    type='SegInstSpformer3DSeg',
+    voxel_size=0.01)
+num_channels = 64
+num_classes_scannet = 3
+optim_wrapper = dict(
+    clip_grad=dict(max_norm=10, norm_type=2),
+    optimizer=dict(lr=0.0001, type='AdamW', weight_decay=0.05),
+    type='OptimWrapper')
+param_scheduler = dict(
+    begin=0, by_epoch=False, end=60000, power=0.9, type='PolyLR')
+resume = False
+sem_mapping = [
+    0,
+    1,
+    2,
+]
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file='scannet_infos_val.pkl',
+        data_prefix=dict(
+            pts='points',
+            pts_instance_mask='instance_mask',
+            pts_semantic_mask='semantic_mask'),
+        data_root='data/wheel_12/',
+        metainfo=dict(classes=(
+            'grain',
+            'leaf',
+            'steam',
+        ), ignore_index=3),
+        pipeline=[
+            dict(
+                coord_type='DEPTH',
+                load_dim=7,
+                shift_height=False,
+                type='LoadPointsFromFile',
+                use_color=False,
+                use_dim=[
+                    0,
+                    1,
+                    2,
+                    3,
+                ],
+                use_onehot=True),
+            dict(
+                seg_3d_dtype='np.int32',
+                type='LoadAnnotations3D',
+                with_bbox_3d=False,
+                with_label_3d=False,
+                with_mask_3d=True,
+                with_seg_3d=True),
+            dict(
+                flip=False,
+                img_scale=(
+                    1333,
+                    800,
+                ),
+                pts_scale_ratio=1,
+                transforms=[
+                    dict(
+                        color_mean=[
+                            127.5,
+                            127.5,
+                            127.5,
+                        ],
+                        type='NormalizePointsColor1'),
+                ],
+                type='MultiScaleFlipAug3D'),
+            dict(keys=[
+                'points',
+            ], type='Pack3DDetInputs_'),
+        ],
+        test_mode=True,
+        type='WheelSegDataset'),
+    drop_last=False,
+    num_workers=1,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    inst_mapping=[
+        0,
+        1,
+        2,
+    ],
+    metric_meta=dict(
+        classes=[
+            'grain',
+            'leaf',
+            'steam',
+        ],
+        dataset_name='S3DIS',
+        ignore_index=[
+            3,
+        ],
+        label2cat=dict({
+            0: 'grain',
+            1: 'leaf',
+            2: 'steam'
+        })),
+    sem_mapping=[
+        0,
+        1,
+        2,
+    ],
+    stuff_class_inds=[
+        0,
+        1,
+        2,
+    ],
+    submission_prefix_instance=None,
+    submission_prefix_semantic=None,
+    thing_class_inds=[
+        0,
+        1,
+        2,
+    ],
+    type='SegInstMetric')
+test_pipeline_scannet = [
+    dict(
+        coord_type='DEPTH',
+        load_dim=7,
+        shift_height=False,
+        type='LoadPointsFromFile',
+        use_color=False,
+        use_dim=[
+            0,
+            1,
+            2,
+            3,
+        ],
+        use_onehot=True),
+    dict(
+        seg_3d_dtype='np.int32',
+        type='LoadAnnotations3D',
+        with_bbox_3d=False,
+        with_label_3d=False,
+        with_mask_3d=True,
+        with_seg_3d=True),
+    dict(
+        flip=False,
+        img_scale=(
+            1333,
+            800,
+        ),
+        pts_scale_ratio=1,
+        transforms=[
+            dict(
+                color_mean=[
+                    127.5,
+                    127.5,
+                    127.5,
+                ],
+                type='NormalizePointsColor1'),
+        ],
+        type='MultiScaleFlipAug3D'),
+    dict(keys=[
+        'points',
+    ], type='Pack3DDetInputs_'),
+]
+train_cfg = dict(max_iters=60000, type='IterBasedTrainLoop', val_interval=500)
+train_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file='scannet_infos_train.pkl',
+        data_prefix=dict(
+            pts='points',
+            pts_instance_mask='instance_mask',
+            pts_semantic_mask='semantic_mask'),
+        data_root='data/wheel_12/',
+        metainfo=dict(classes=(
+            'grain',
+            'leaf',
+            'steam',
+        ), ignore_index=3),
+        pipeline=[
+            dict(
+                coord_type='DEPTH',
+                load_dim=7,
+                shift_height=False,
+                type='LoadPointsFromFile',
+                use_color=False,
+                use_dim=[
+                    0,
+                    1,
+                    2,
+                    3,
+                ],
+                use_onehot=True),
+            dict(
+                seg_3d_dtype='np.int32',
+                type='LoadAnnotations3D',
+                with_bbox_3d=False,
+                with_label_3d=False,
+                with_mask_3d=True,
+                with_seg_3d=True),
+            dict(type='PointSegClassMapping'),
+            dict(num_classes=3, type='PointInstClassMapping_'),
+            dict(
+                flip_ratio_bev_horizontal=0.5,
+                flip_ratio_bev_vertical=0.5,
+                sync_2d=False,
+                type='RandomFlip3D'),
+            dict(
+                rot_range=[
+                    -3.14,
+                    3.14,
+                ],
+                scale_ratio_range=[
+                    0.8,
+                    1.2,
+                ],
+                shift_height=False,
+                translation_std=[
+                    0.1,
+                    0.1,
+                    0.1,
+                ],
+                type='GlobalRotScaleTrans'),
+            dict(
+                gran=[
+                    6,
+                    20,
+                ],
+                mag=[
+                    40,
+                    160,
+                ],
+                type='ElasticTransfrom',
+                voxel_size=0.01),
+            dict(
+                keys=[
+                    'points',
+                    'gt_labels_3d',
+                    'pts_semantic_mask',
+                    'elastic_coords',
+                    'pts_instance_mask',
+                ],
+                type='Pack3DDetInputs_'),
+        ],
+        test_mode=False,
+        type='WheelSegDataset'),
+    num_workers=6,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline_scannet = [
+    dict(
+        coord_type='DEPTH',
+        load_dim=7,
+        shift_height=False,
+        type='LoadPointsFromFile',
+        use_color=False,
+        use_dim=[
+            0,
+            1,
+            2,
+            3,
+        ],
+        use_onehot=True),
+    dict(
+        seg_3d_dtype='np.int32',
+        type='LoadAnnotations3D',
+        with_bbox_3d=False,
+        with_label_3d=False,
+        with_mask_3d=True,
+        with_seg_3d=True),
+    dict(type='PointSegClassMapping'),
+    dict(num_classes=3, type='PointInstClassMapping_'),
+    dict(
+        flip_ratio_bev_horizontal=0.5,
+        flip_ratio_bev_vertical=0.5,
+        sync_2d=False,
+        type='RandomFlip3D'),
+    dict(
+        rot_range=[
+            -3.14,
+            3.14,
+        ],
+        scale_ratio_range=[
+            0.8,
+            1.2,
+        ],
+        shift_height=False,
+        translation_std=[
+            0.1,
+            0.1,
+            0.1,
+        ],
+        type='GlobalRotScaleTrans'),
+    dict(
+        gran=[
+            6,
+            20,
+        ],
+        mag=[
+            40,
+            160,
+        ],
+        type='ElasticTransfrom',
+        voxel_size=0.01),
+    dict(
+        keys=[
+            'points',
+            'gt_labels_3d',
+            'pts_semantic_mask',
+            'elastic_coords',
+            'pts_instance_mask',
+        ],
+        type='Pack3DDetInputs_'),
+]
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file='scannet_infos_val.pkl',
+        data_prefix=dict(
+            pts='points',
+            pts_instance_mask='instance_mask',
+            pts_semantic_mask='semantic_mask'),
+        data_root='data/wheel_12/',
+        metainfo=dict(classes=(
+            'grain',
+            'leaf',
+            'steam',
+        ), ignore_index=3),
+        pipeline=[
+            dict(
+                coord_type='DEPTH',
+                load_dim=7,
+                shift_height=False,
+                type='LoadPointsFromFile',
+                use_color=False,
+                use_dim=[
+                    0,
+                    1,
+                    2,
+                    3,
+                ],
+                use_onehot=True),
+            dict(
+                seg_3d_dtype='np.int32',
+                type='LoadAnnotations3D',
+                with_bbox_3d=False,
+                with_label_3d=False,
+                with_mask_3d=True,
+                with_seg_3d=True),
+            dict(
+                flip=False,
+                img_scale=(
+                    1333,
+                    800,
+                ),
+                pts_scale_ratio=1,
+                transforms=[
+                    dict(
+                        color_mean=[
+                            127.5,
+                            127.5,
+                            127.5,
+                        ],
+                        type='NormalizePointsColor1'),
+                ],
+                type='MultiScaleFlipAug3D'),
+            dict(keys=[
+                'points',
+            ], type='Pack3DDetInputs_'),
+        ],
+        test_mode=True,
+        type='WheelSegDataset'),
+    drop_last=False,
+    num_workers=1,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    inst_mapping=[
+        0,
+        1,
+        2,
+    ],
+    metric_meta=dict(
+        classes=[
+            'grain',
+            'leaf',
+            'steam',
+        ],
+        dataset_name='S3DIS',
+        ignore_index=[
+            3,
+        ],
+        label2cat=dict({
+            0: 'grain',
+            1: 'leaf',
+            2: 'steam'
+        })),
+    sem_mapping=[
+        0,
+        1,
+        2,
+    ],
+    stuff_class_inds=[
+        0,
+        1,
+        2,
+    ],
+    submission_prefix_instance=None,
+    submission_prefix_semantic=None,
+    thing_class_inds=[
+        0,
+        1,
+        2,
+    ],
+    type='SegInstMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='Det3DLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+voxel_size = 0.01
+work_dir = './work_dirs/xyzs'
+
+2025/06/29 02:22:51 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2025/06/29 02:22:51 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+(NORMAL      ) EmptyCacheHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) Det3DVisualizationHook             
+(NORMAL      ) EmptyCacheHook                     
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) Det3DVisualizationHook             
+(NORMAL      ) EmptyCacheHook                     
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) EmptyCacheHook                     
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2025/06/29 02:22:51 - mmengine - WARNING - The prefix is not set in metric class SegInstMetric.
+2025/06/29 02:22:51 - mmengine - INFO - Load checkpoint from work_dirs/xyzs.pth
+2025/06/29 02:22:52 - mmengine - INFO - 
++---------+--------+--------+--------+--------+--------+---------+
+| classes | grain  | leaf   | steam  | miou   | acc    | acc_cls |
++---------+--------+--------+--------+--------+--------+---------+
+| results | 0.9493 | 0.8546 | 0.9411 | 0.9150 | 0.9610 | 0.9496  |
++---------+--------+--------+--------+--------+--------+---------+
+2025/06/29 02:22:54 - mmengine - INFO - 
++---------+---------+---------+--------+-----------+----------+
+| classes | AP_0.25 | AP_0.50 | AP     | Prec_0.50 | Rec_0.50 |
++---------+---------+---------+--------+-----------+----------+
+| grain   | 0.8192  | 0.5900  | 0.3278 | 0.9266    | 0.5274   |
+| leaf    | 0.7694  | 0.6241  | 0.4855 | 1.0000    | 0.5455   |
+| steam   | 0.8527  | 0.6376  | 0.4629 | 0.8000    | 0.6667   |
++---------+---------+---------+--------+-----------+----------+
+| Overall | 0.8138  | 0.6173  | 0.4254 | 0.9089    | 0.5798   |
++---------+---------+---------+--------+-----------+----------+
+2025/06/29 02:22:54 - mmengine - INFO - Iter(test) [9/9]    miou: 0.9150  all_ap: 0.4254  all_ap_50%: 0.6173  all_ap_25%: 0.8138  data_time: 0.0207  time: 0.1541
