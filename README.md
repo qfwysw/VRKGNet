@@ -24,17 +24,10 @@ bash train_tools/xyzs.sh
 
 ### 💾 Model Weights
 
-Trained model checkpoints are saved in the `work_dirs/` directory. You can use these checkpoints for:
-
-- Evaluation
-- Fine-tuning
-- Inference
+Trained model checkpoints are saved in the `work_dirs/` directory. 
+https://drive.google.com/file/d/1LJhDS9E5M-fbhLQAAG2G65kolCXi8nuG/view?usp=sharing
 
 ### 📊 Results and Logs
 
-All output results and logs are stored in the `results/` directory, including:
-
-- Segmentation predictions
-- Evaluation metrics
-- Training and inference logs
+All output results and logs are stored in the `results/` directory.
 
